@@ -1,0 +1,203 @@
+[gd_scene load_steps=24 format=3 uid="uid://ddnsnbo63vfl8"]
+
+[ext_resource type="Shader" uid="uid://blsr1mdmnhi6s" path="res://shaders/crosshatching shader.gdshader" id="1_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://rn0s1wwh2xwd" path="res://kloofendal_overcast_puresky_4k.exr" id="1_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bk7lfi056wgxn" path="res://Hatching.jpg" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://b1uuuwgo8b426" path="res://scenes/player.gd" id="3_tefeu"]
+[ext_resource type="Shader" uid="uid://blvmoy8wf688t" path="res://shaders/Outline.gdshader" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c1rvuksai268w" path="res://projectile.tscn" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://d4i6jecmdq5mr" path="res://pixil-frame-0.png" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://bkxeflvuucu8o" path="res://pixil-frame-1.png" id="8_choun"]
+[ext_resource type="Texture2D" uid="uid://dtt0qervn23k6" path="res://pixil-frame-2.png" id="9_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://ce2c86io3txmb" path="res://pixil-frame-3.png" id="10_eb6dy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tefeu"]
+panorama = ExtResource("1_tbgi4")
+energy_multiplier = 0.3
+
+[sub_resource type="Sky" id="Sky_272bh"]
+sky_material = SubResource("PanoramaSkyMaterial_tefeu")
+
+[sub_resource type="Environment" id="Environment_5vw27"]
+background_mode = 2
+background_color = Color(0.66785365, 0.7973434, 0.8754332, 1)
+sky = SubResource("Sky_272bh")
+glow_enabled = true
+glow_bloom = 0.67
+adjustment_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+shader = ExtResource("1_jyhfs")
+shader_parameter/hatch_tex = ExtResource("2_tbgi4")
+shader_parameter/hatch_scale = 4.0
+shader_parameter/shadow_threshold = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.9999996, 0.7036751, 0.41803506, 1)
+rim = 0.0
+rim_tint = 1.0
+uv2_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jyhfs"]
+data = PackedVector3Array(-3.1957703, -0.085998535, 3.4726563, -3.1957703, -0.085998535, -3.4726563, -3.1957703, 0.085998535, -3.4726563, 3.1957703, -0.085998535, -3.4726563, -3.1957703, -0.085998535, -3.4726563, -3.1957703, -0.085998535, 3.4726563, -3.1957703, 0.085998535, -3.4726563, -3.1957703, -0.085998535, -3.4726563, 3.1957703, -0.085998535, -3.4726563, -3.1957703, 0.085998535, -3.4726563, -3.1957703, 0.085998535, 3.4726563, -3.1957703, -0.085998535, 3.4726563, -3.1957703, -0.085998535, 3.4726563, -3.1957703, 0.085998535, 3.4726563, 3.1957703, 0.085998535, 3.4726563, 3.1957703, 0.085998535, 3.4726563, -3.1957703, 0.085998535, 3.4726563, -3.1957703, 0.085998535, -3.4726563, -3.1957703, -0.085998535, 3.4726563, 3.1957703, -0.085998535, 3.4726563, 3.1957703, -0.085998535, -3.4726563, 3.1957703, 0.085998535, 3.4726563, 3.1957703, -0.085998535, 3.4726563, -3.1957703, -0.085998535, 3.4726563, 3.1957703, -0.085998535, -3.4726563, 3.1957703, -0.085998535, 3.4726563, 3.1957703, 0.085998535, 3.4726563, 3.1957703, -0.085998535, -3.4726563, 3.1957703, 0.085998535, -3.4726563, -3.1957703, 0.085998535, -3.4726563, -3.1957703, 0.085998535, -3.4726563, 3.1957703, 0.085998535, -3.4726563, 3.1957703, 0.085998535, 3.4726563, 3.1957703, 0.085998535, 3.4726563, 3.1957703, 0.085998535, -3.4726563, 3.1957703, -0.085998535, -3.4726563)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.50930744, 0.66792226, 1, 1)
+distance_fade_mode = 2
+distance_fade_min_distance = 0.01
+distance_fade_max_distance = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(0.95080566, 1.1376343, 0.7249756)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+render_priority = 0
+shader = ExtResource("4_o6xl0")
+shader_parameter/depth_treshold = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+material = SubResource("ShaderMaterial_0xm2m")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyhfs"]
+radius = 0.30078125
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tbgi4"]
+radius = 0.15
+height = 0.6
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_trceg"]
+frames = 4
+frame_0/texture = ExtResource("7_o6xl0")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("8_choun")
+frame_1/duration = 0.3
+frame_2/texture = ExtResource("9_ya4ey")
+frame_2/duration = 0.3
+frame_3/texture = ExtResource("10_eb6dy")
+frame_3/duration = 0.3
+
+[node name="main" type="Node3D"]
+
+[node name="world_lighting" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world_lighting"]
+environment = SubResource("Environment_5vw27")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="world_lighting"]
+transform = Transform3D(-0.30085567, -0.8259023, 0.4768348, 1.4923847e-08, 0.49999997, 0.86602545, -0.9536697, 0.26054865, -0.15042779, -0.7731036, 1.6620305, -1.5283277)
+shadow_enabled = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_h2yge")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="env" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="floor" type="CSGBox3D" parent="SubViewportContainer/SubViewport/env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0024926662, -0.5540662, -2.970974)
+use_collision = true
+size = Vector3(30, 1.1206679, 30)
+material = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="floor2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00039672852, 1.4503024, 17.957994)
+size = Vector3(30, 0.172, 30)
+material = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/env/floor2"]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/env/floor2/StaticBody3D"]
+transform = Transform3D(4.5, 0, 0, 0, 4.5, 0, 0, 0, 4.5, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_jyhfs")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/env"]
+transform = Transform3D(0.2644166, 0.0062140943, 0.96438843, -0.018424183, 0.9998292, -0.0013910085, -0.96423244, -0.017400175, 0.26448593, -1.1599376, 0.3246014, -2.5761254)
+size = Vector3(0.7927246, 0.7055664, 0.60058594)
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/env/CSGBox3D2"]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/env/CSGBox3D2/StaticBody3D"]
+transform = Transform3D(0.99999964, 5.9604645e-07, 2.8312206e-07, -8.940697e-07, 0.99999857, 2.9802322e-08, 1.1324883e-06, 8.493662e-07, 0.99999905, -0.0065333843, 0.017333984, 0.051452637)
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/env"]
+transform = Transform3D(0.2644166, 0.0062140943, 0.96438843, -0.018424183, 0.9998292, -0.0013910085, -0.96423244, -0.017400175, 0.26448593, -1.949178, 0.5170734, -3.072512)
+size = Vector3(0.7927246, 1.0905762, 0.60058594)
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/env/CSGBox3D3"]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/env/CSGBox3D3/StaticBody3D"]
+transform = Transform3D(0.9999978, 6.109476e-07, 4.172325e-07, -9.2200935e-07, 0.9999969, 3.9115548e-08, 1.4603138e-06, 8.614734e-07, 0.9999981, -0.0065329075, -0.016204476, 0.051452637)
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("3_tefeu")
+projectile_scene = ExtResource("5_tefeu")
+
+[node name="Head" type="Node3D" parent="SubViewportContainer/SubViewport/player"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/player/Head"]
+transform = Transform3D(0.9961712, -0.03340815, 0.0807899, 0.03277529, 0.99942094, 0.009147238, -0.081048705, -0.0064643025, 0.9966892, 0, 0, 0)
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/player/Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, -8.940697e-08, 0, 8.940697e-08, 0.99999976, 0.000803411, -0.2960832, -0.80006975)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_1bvp3")
+
+[node name="GunMuzzle" type="Marker3D" parent="SubViewportContainer/SubViewport/player/Head/Camera3D"]
+transform = Transform3D(-1, 6.1118044e-09, -5.9604645e-08, -2.8812792e-08, 1.0000005, -9.313226e-10, 8.940697e-08, 4.656613e-10, -1, 0.039, -0.35, 0.004)
+
+[node name="standing_collisionshape" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_jyhfs")
+
+[node name="crouching_collisionshape" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_tbgi4")
+
+[node name="RayCast3D" type="RayCast3D" parent="SubViewportContainer/SubViewport/player"]
+target_position = Vector3(0, 2.3, 0)
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_trceg")
