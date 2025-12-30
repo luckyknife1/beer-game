@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck4iokb2k8e2a"]
+
+[ext_resource type="FontFile" uid="uid://k7mmmq7pmdu6" path="res://OldEnglishGothicPixelRegular-ow2Bo.ttf" id="1_uyutr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a8y0u"]
+font = ExtResource("1_uyutr")
+font_size = 70
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uyutr"]
+font = ExtResource("1_uyutr")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkv2x"]
+font = ExtResource("1_uyutr")
+font_size = 20
+
+[node name="death_screen" type="Node3D"]
+
+[node name="game over background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+
+[node name="game_over_text" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -132.0
+offset_right = 146.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_a8y0u")
+
+[node name="Restart" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.508
+anchor_top = 0.509
+anchor_right = 0.508
+anchor_bottom = 0.509
+offset_left = -82.216
+offset_top = -30.832
+offset_right = 76.784
+offset_bottom = 0.16799927
+grow_horizontal = 2
+grow_vertical = 2
+text = "press R to restart"
+label_settings = SubResource("LabelSettings_uyutr")
+
+[node name="Quit" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = 7.0
+offset_right = 20.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "press esc to quit"
+label_settings = SubResource("LabelSettings_jkv2x")
